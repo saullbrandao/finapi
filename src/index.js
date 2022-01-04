@@ -136,4 +136,12 @@ app.delete('/account', verifyIfAccountExists, (req, res) => {
   return res.status(200).json(customers)
 })
 
+app.get('/balance', verifyIfAccountExists, (req, res) => {
+  const { customer } = req
+
+  const balance = getAccountBalance(customer.statement)
+
+  return res.json({ balance })
+})
+
 app.listen(3333)
