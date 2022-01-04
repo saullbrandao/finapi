@@ -1,4 +1,5 @@
 const { request } = require('express')
+const { response } = require('express')
 const express = require('express')
 const { v4: uuidv4 } = require('uuid')
 
@@ -125,6 +126,14 @@ app.get('/account', verifyIfAccountExists, (req, res) => {
   const { customer } = request
 
   return res.json(customer)
+})
+
+app.delete('/account', verifyIfAccountExists, (req, res) => {
+  const { customer } = req
+
+  customers.splice(customer, 1)
+
+  return res.status(200).json(customers)
 })
 
 app.listen(3333)
