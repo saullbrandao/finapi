@@ -112,4 +112,19 @@ app.get('/statement/date', verifyIfAccountExists, (req, res) => {
   return res.json(statement)
 })
 
+app.put('/account', verifyIfAccountExists, (req, res) => {
+  const { name } = req.body
+  const { customer } = req
+
+  customer.name = name
+
+  return res.status(201).send()
+})
+
+app.get('/account', verifyIfAccountExists, (req, res) => {
+  const { customer } = request
+
+  return res.json(customer)
+})
+
 app.listen(3333)
